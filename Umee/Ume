@@ -57,7 +57,7 @@ echo -e "              \e[1m\e[32m3. Downloading and building binaries--> \e[0m"
 cd $HOME 
 git clone https://github.com/umee-network/umee.git
 cd umee
-git checkout v3.0.3
+git checkout v3.1.0
 make install
 
 umeed init $Validator_Name --chain-id $CHAIN_ID
@@ -135,8 +135,8 @@ echo -e "      \e[1m\e[32m!!!!!!!!!SAVE!!!!!!!!!!!!!!!!SAVE YOUR MNEMONIC PHRASE
 break
 ;;
 "Synchronization via StateSync")
-SNAP_RPC=141.95.124.151:21027
-peers="3ac6c5417f461494e9ce778f652922ae59566262@141.95.124.151:21026"
+SNAP_RPC=http://umee.rpc.m.stavr.tech:29007
+peers="4fea173bd41127f452226a9383dfa05deb5736ba@135.181.5.47:29006"
 sed -i -e "s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" ~/.umee/config/config.toml
 LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
 BLOCK_HEIGHT=$((LATEST_HEIGHT - 500)); \
@@ -157,7 +157,7 @@ cd $HOME
 rm -rf umee
 git clone https://github.com/umee-network/umee.git
 cd umee
-git checkout v3.0.3
+git checkout v3.1.0
 make build
 mv $HOME/umee/build/umeed $(which umeed)
 sudo systemctl restart umeed && journalctl -u umeed -f -o cat

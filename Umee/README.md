@@ -1,7 +1,7 @@
 # Umee mainnet guide
 ![изображение](https://user-images.githubusercontent.com/44331529/180614842-60138156-dcfd-4dce-9ff2-c89fcc5c38dc.png)
 
-[EXPLORER 1](https://umee.explorers.guru/validators) \
+[EXPLORER 1](https://explorer.stavr.tech/umee/staking) \
 [EXPLORER 2](https://www.mintscan.io/umee/validators)
 =
 - **Recommended hardware requirements**:
@@ -21,7 +21,7 @@ wget -O Ume https://raw.githubusercontent.com/obajay/nodes-Guides/main/Umee/Ume 
 sudo apt update
 sudo apt install make clang pkg-config libssl-dev build-essential git jq ncdu bsdmainutils htop net-tools lsof -y < "/dev/null"
 ```
-## Go and binaries  21.10.22
+## Go and binaries  27.10.22
 ```
 ver="1.18.3" && \
 cd $HOME && \
@@ -37,11 +37,11 @@ go version
 cd $HOME 
 git clone https://github.com/umee-network/umee.git
 cd umee
-git checkout v3.0.3
+git checkout v3.1.0
 make install
 ```
 `umeed version`
-+ v3.0.3
++ v3.1.0
 
 ## Init
 ```bash
@@ -76,9 +76,9 @@ wget -O $HOME/.umee/config/addrbook.json "https://raw.githubusercontent.com/obaj
 
 ### StateSync
 
-```console
-SNAP_RPC=141.95.124.151:21027
-peers="3ac6c5417f461494e9ce778f652922ae59566262@141.95.124.151:21026"
+```bash
+SNAP_RPC=http://umee.rpc.m.stavr.tech:29007
+peers="4fea173bd41127f452226a9383dfa05deb5736ba@135.181.5.47:29006"
 sed -i -e "s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" ~/.umee/config/config.toml
 LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
 BLOCK_HEIGHT=$((LATEST_HEIGHT - 500)); \
@@ -94,7 +94,7 @@ umeed unsafe-reset-all
 wget -O $HOME/.umee/config/addrbook.json "https://raw.githubusercontent.com/obajay/nodes-Guides/main/Umee/addrbook.json"
 sudo systemctl restart umeed && journalctl -u umeed -f -o cat
 ```
-# SnapShot 27.09.22 (0.5 GB) height 3211857
+# SnapShot 30.10.22 (0.6 GB) height 3665253
 ```bash
 # install the node as standard, but do not launch. Then we delete the .data directory and create an empty directory
 sudo systemctl stop umeed
@@ -103,18 +103,12 @@ mkdir $HOME/.umee/data/
 
 # download archive
 cd $HOME
-wget http://141.95.124.151:6000/umeedata.tar.gz
+wget http://umee.snapshot.stavr.tech:6000/umeedata.tar.gz
 
 # unpack the archive
 tar -C $HOME/ -zxvf umeedata.tar.gz --strip-components 1
-# !! IMPORTANT POINT. If the validator was created earlier. Need to reset priv_validator_state.json  !!
 wget -O $HOME/.umee/data/priv_validator_state.json "https://raw.githubusercontent.com/obajay/StateSync-snapshots/main/priv_validator_state.json"
 cd && cat .umee/data/priv_validator_state.json
-{
-  "height": "0",
-  "round": 0,
-  "step": 0
-}
 # after unpacking, run the node
 # don't forget to delete the archive to save space
 cd $HOME
