@@ -2,8 +2,8 @@
 ![Kyve (2)](https://user-images.githubusercontent.com/44331529/180600823-b7f4a17d-c213-49b5-a1b9-cbe2e3b630e2.png)
 ![Kyve (1)](https://user-images.githubusercontent.com/44331529/180600827-c8beffd5-dcb3-4ded-a9d6-8f9aa6c0859f.png)
 
-
-[EXPLORER](https://explorer.beta.kyve.network/kyve-betanet/staking)
+[EXPLORER 1](https://explorer.stavr.tech/kyvebeta/staking) \
+[EXPLORER 2](https://explorer.beta.kyve.network/kyve-betanet/staking) 
 =
 - **Minimum hardware requirements**:
 
@@ -28,18 +28,18 @@
     source $HOME/.bash_profile && \
     go version
 
-# Build 28.10.22
+# Build 10.11.22
 ```bash
 cd $HOME
-wget https://kyve-beta.s3.eu-central-1.amazonaws.com/v0.7.0_beta7_v2/chain_linux_amd64.tar.gz
-tar -xvzf chain_linux_amd64.tar.gz
-chmod +x chaind
-sudo mv chaind $HOME/go/bin/
-rm chain_linux_amd64.tar.gz
+wget https://kyve-beta.s3.eu-central-1.amazonaws.com/v0.7.0_beta8/kyved_linux_amd64.tar.gz
+tar -xvzf kyved_linux_amd64.tar.gz
+chmod +x kyved
+sudo mv kyved $HOME/go/bin/chaind
+rm kyved_linux_amd64.tar.gz
 ```
 
 ```bash
-chaind init <moniker> --chain-id kyve-beta
+chaind init STAVRguide --chain-id kyve-beta
 chaind config chain-id kyve-beta
 ```
 
@@ -81,6 +81,13 @@ sed -i 's/max_num_outbound_peers =.*/max_num_outbound_peers = 100/g' $HOME/.kyve
     indexer="null" && \
     sed -i -e "s/^indexer *=.*/indexer = \"$indexer\"/" $HOME/.kyve/config/config.toml
 
+## Download addrbook
+```
+wget -O $HOME/.kyve/config/addrbook.json "https://raw.githubusercontent.com/obajay/nodes-Guides/main/Kyve/beta/addrbook.json"
+```
+
+
+
 # Create a service file
 ```console
 sudo tee <<EOF > /dev/null /etc/systemd/system/kyved.service
@@ -99,6 +106,20 @@ LimitNOFILE=infinity
 WantedBy=multi-user.target
 EOF
 ```
+
+## SnapShot (0.1 GB) updated every 24 hours
+```python
+cd $HOME
+sudo systemctl stop kyved
+cp $HOME/.kyve/data/priv_validator_state.json $HOME/.kyve/priv_validator_state.json.backup
+rm -rf $HOME/.kyve/data
+wget http://kyvebeta.snapshot.stavr.tech:5102/kyve/kyve-snap.tar.lz4 && lz4 -c -d $HOME/kyve-snap.tar.lz4 | tar -x -C $HOME/.kyve --strip-components 2
+rm -rf kyve-snap.tar.lz4
+mv $HOME/.kyve/priv_validator_state.json.backup $HOME/.kyve/data/priv_validator_state.json
+sudo systemctl restart kyved && journalctl -u kyved -f -o cat
+```
+
+
 # State Sync KYVE (kyve-beta)
 ```bash
 SNAP_RPC="kyveb.rpc.t.stavr.tech:20057"

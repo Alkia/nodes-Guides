@@ -144,13 +144,13 @@ sudo systemctl restart nibid && sudo journalctl -u nibid -f -o cat
 nibid tx staking create-validator \
 --amount=1000000unibi \
 --pubkey=$(nibid tendermint show-validator) \
---moniker=STAVR \
+--moniker=STAVRguide \
 --chain-id=nibiru-testnet-1 \
 --commission-rate="0.10" \
 --commission-max-rate="0.20" \
 --commission-max-change-rate="0.1" \
 --min-self-delegation="1" \
---from=STAVR1 \
+--from=<walletname> \
 --identity="" \
 --details="" \
 --website="" \
