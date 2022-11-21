@@ -64,9 +64,9 @@ ELECTRA_CHAIN="electra-testnet-0"  # do not change
     mv genesis.json ~/.electrad/config/    
 
 # save vars
-echo 'export CELESTIA_CHAIN='$CELESTIA_CHAIN >> $HOME/.bash_profile
-echo 'export CELESTIA_NODENAME='${CELESTIA_NODENAME} >> $HOME/.profile
-echo 'export CELESTIA_WALLET='${CELESTIA_WALLET} >> $HOME/.profile
+echo 'export ELECTRA_CHAIN='$ELECTRA_CHAIN >> $HOME/.profile
+echo 'export ELECTRA_NODENAME='${ELECTRA_NODENAME} >> $HOME/.profile
+echo 'export ELECTRA_WALLET='${ELECTRA_WALLET} >> $HOME/.profile
 source $HOME/.profile
 
 # update bootstrap-peers
@@ -78,10 +78,7 @@ sed -i.bak -e "s/^bootstrap-peers *=.*/bootstrap-peers = \"$BOOTSTRAP_PEERS\"/" 
 
 
 ```
-## Create/recover wallet
-     electrad keys add <walletname>
-     electrad keys add <walletname> --recover
-##### when creating, do not forget to write down the seed phrase    
+
 
 ## Set up the minimum gas price $HOME/.evmosd/config/app.toml as well as seed and peers
     sed -i.bak -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"1electra\"/;" ~/.electrad/config/app.toml
@@ -109,6 +106,15 @@ sed -i.bak -e "s/^bootstrap-peers *=.*/bootstrap-peers = \"$BOOTSTRAP_PEERS\"/" 
     
 ## Reset before start
 electrad tendermint unsafe-reset-all  
+
+## Config client
+
+```bash
+celestia-appd config chain-id $CELESTIA_CHAIN
+celestia-appd config keyring-backend test
+```
+
+##
     
 ## Create a service file
     sudo tee /etc/systemd/system/electrad.service > /dev/null <<EOF
@@ -136,7 +142,11 @@ electrad tendermint unsafe-reset-all
     sudo systemctl enable electrad
     sudo systemctl restart electrad
     sudo journalctl -u electrad -f -o cat
-    
+
+## Create/recover wallet
+     electrad keys add <walletname>
+     electrad keys add <walletname> --recover
+##### when creating, do not forget to write down the seed phrase    
     
 ## Delete node
 
