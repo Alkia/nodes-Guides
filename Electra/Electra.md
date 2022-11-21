@@ -27,12 +27,12 @@
     go version
     
 ## Build    (27.10.22)
-    git clone https://github.com/evmos/evmos
+    git clone https://github.com/alkia/electra
     cd electra
-    git checkout v1.0.1
+    git checkout v0.2.0
     make install
 `electrad version`
-+ 1.0.1
++ 0.2.0
 
   
       
@@ -110,8 +110,8 @@ electrad tendermint unsafe-reset-all
 ## Config client
 
 ```bash
-celestia-appd config chain-id $CELESTIA_CHAIN
-celestia-appd config keyring-backend test
+electrad config chain-id $ELECTRA_CHAIN
+electrad config keyring-backend test
 ```
 
 ##
