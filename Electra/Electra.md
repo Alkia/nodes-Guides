@@ -41,6 +41,8 @@
 # set your names
 ELECTRA_NODENAME="MY_NODE"
 ELECTRA_WALLET="MY_WALLET"
+# update bootstrap-peers
+BOOTSTRAP_PEERS=
 
 ELECTRA_NODENAME="electra01"
 ELECTRA_WALLET="alice"
