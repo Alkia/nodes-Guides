@@ -50,14 +50,14 @@ ELECTRA_CHAIN="electra-testnet-0"  # do not change
 
 ## Init node
 ```
-# do init
-celestia-appd init $CELESTIA_NODENAME --chain-id $CELESTIA_CHAIN
+    # do init
+    electrad init $ELECTRA_NODENAME --chain-id $ELECTRA_CHAIN
 
-# OUTPUT EXAMPLE
+    # OUTPUT EXAMPLE
 
 
-# copy genesis
-cp $HOME/electra-testnet-0/genesis.json $HOME/.celestia-app/config/
+    # copy genesis
+    cp $HOME/electra-testnet-0/genesis.json $HOME/.celestia-app/config/
 ```
 
 # save vars
