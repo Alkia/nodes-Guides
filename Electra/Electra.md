@@ -2,7 +2,7 @@
 ![Electra (1)](https://github.com/Alkia/electra/raw/master/vue/public/Electra.png)
 
 
-[Website](https://www.alkia.net/) \
+[Website](https://www.alkia.net/) 
 [EXPLORER](https://www.mintscan.io/electra/validators)
 =
 - **Recommended hardware requirements**:
@@ -11,6 +11,17 @@
 |-----------|----|------|----------|
 | Testnet   |  2 | 8GB | 0.25TB SSD/NVMe |
 | Mainnet   |  2 | 16GB | 0.5TB SSD/NVMe |
+
+
+| Ports   | Role  | 
+|-----------|----------|
+| 1318      | API      |
+| 9092      | grpc     |
+| 9093      | grpc-web |
+| 1318      | API      |
+| 26658     | P2P laddr|
+| 26659     | rpc laddr|
+| 6061      | rpc pprof|
 
 ### Preparing the server
 
