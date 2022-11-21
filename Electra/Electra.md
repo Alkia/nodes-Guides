@@ -34,8 +34,37 @@
 `electrad version`
 + 1.0.1
 
-      electrad init <moniker-name> --chain-id evmos_9001-2
-    
+  
+      
+## Set the variables
+```
+# set your names
+ELECTRA_NODENAME="MY_NODE"
+ELECTRA_WALLET="MY_WALLET"
+
+ELECTRA_NODENAME="electra01"
+ELECTRA_WALLET="alice"
+ELECTRA_CHAIN="electra-testnet-0"  # do not change
+
+## Init node
+```
+# do init
+celestia-appd init $CELESTIA_NODENAME --chain-id $CELESTIA_CHAIN
+
+# OUTPUT EXAMPLE
+
+
+# copy genesis
+cp $HOME/electra-testnet-0/genesis.json $HOME/.celestia-app/config/
+```
+
+# save vars
+echo 'export CELESTIA_CHAIN='$CELESTIA_CHAIN >> $HOME/.bash_profile
+echo 'export CELESTIA_NODENAME='${CELESTIA_NODENAME} >> $HOME/.bash_profile
+echo 'export CELESTIA_WALLET='${CELESTIA_WALLET} >> $HOME/.bash_profile
+source $HOME/.bash_profile
+
+```
 ## Create/recover wallet
      electrad keys add <walletname>
      electrad keys add <walletname> --recover
@@ -44,7 +73,7 @@
     wget https://www.alkia.net/mainnet/genesis.json
     mv genesis.json ~/.electrad/config/    
 ## Set up the minimum gas price $HOME/.evmosd/config/app.toml as well as seed and peers
-    sed -i.bak -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0.0electra\"/;" ~/.electrad/config/app.toml
+    sed -i.bak -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"1electra\"/;" ~/.electrad/config/app.toml
 
     external_address=$(wget -qO- eth0.me)
     sed -i.bak -e "s/^external_address *=.*/external_address = \"$external_address:26656\"/" $HOME/.electrad/config/config.toml
