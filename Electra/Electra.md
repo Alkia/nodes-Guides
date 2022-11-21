@@ -58,7 +58,7 @@ ELECTRA_CHAIN="electra-testnet-0"  # do not change
 
 
     # copy genesis
-    cp $HOME/electra-testnet-0/genesis.json $HOME/.celestia-app/config/
+    cp $HOME/electra-testnet-0/genesis.json $HOME/.electra/config/
 ```
 
 # save vars
