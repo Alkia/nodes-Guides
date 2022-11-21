@@ -18,7 +18,6 @@
 | 1318      | API      |
 | 9092      | grpc     |
 | 9093      | grpc-web |
-| 1318      | API      |
 | 26658     | P2P laddr|
 | 26659     | rpc laddr|
 | 6061      | rpc pprof|
