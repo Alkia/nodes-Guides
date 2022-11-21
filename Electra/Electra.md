@@ -105,8 +105,9 @@ sed -i.bak -e "s/^bootstrap-peers *=.*/bootstrap-peers = \"$BOOTSTRAP_PEERS\"/" 
     sed -i -e "s/^indexer *=.*/indexer = \"$indexer\"/" $HOME/.electrad/config/config.toml    
     
 ## Reset before start
+```
 electrad tendermint unsafe-reset-all  
-
+```
 ## Config client
 
 ```bash
