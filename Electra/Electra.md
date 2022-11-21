@@ -107,6 +107,9 @@ sed -i.bak -e "s/^bootstrap-peers *=.*/bootstrap-peers = \"$BOOTSTRAP_PEERS\"/" 
     indexer="null" && \
     sed -i -e "s/^indexer *=.*/indexer = \"$indexer\"/" $HOME/.electrad/config/config.toml    
     
+## Reset before start
+electrad tendermint unsafe-reset-all  
+    
 ## Create a service file
     sudo tee /etc/systemd/system/electrad.service > /dev/null <<EOF
     [Unit]
